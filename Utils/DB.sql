@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 22 mars 2022 à 13:36
+-- Généré le : lun. 28 mars 2022 à 13:13
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -37,14 +37,35 @@ CREATE TABLE IF NOT EXISTS `fichiers_upload` (
   `type` varchar(10) COLLATE utf8_bin DEFAULT NULL,
   `size` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=237 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `fichiers_upload`
 --
 
 INSERT INTO `fichiers_upload` (`id`, `name`, `filename`, `type`, `size`) VALUES
-(185, 'Halo-Infinite-donnez-du-style-a-votre-Spartan-avec-des', 'Halo-Infinite-donnez-du-style-a-votre-Spartan-avec-des.jpg', 'jpg', 50454);
+(236, 'Halo-Infinite-donnez-du-style-a-votre-Spartan-avec-des', 'Halo-Infinite-donnez-du-style-a-votre-Spartan-avec-des.jpg', 'jpg', 50454);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_list_hamsek`
+--
+
+DROP TABLE IF EXISTS `user_list_hamsek`;
+CREATE TABLE IF NOT EXISTS `user_list_hamsek` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(33) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `mdp` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `user_list_hamsek`
+--
+
+INSERT INTO `user_list_hamsek` (`id`, `login`, `mdp`) VALUES
+(12, 'coucou', '$2y$10$CyYjQyeg8tmgiTfnmha/KuiNrMpeJwM44FEG7FlIE1BC0FcbQ2M/y');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

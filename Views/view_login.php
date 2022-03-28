@@ -1,7 +1,7 @@
 <?php
 require('view_begin.php');
 ?>
-
+<center>
 <h1>Connexion</h1>
 
 
@@ -12,8 +12,9 @@ require('view_begin.php');
     <input type="reset" value="Reset"> 
 </form>
 <br>
-<a href="?controller=register">New admin</a>
-
+<button onclick="location.href='?controller=register&action=home'" type="button">Page de création de compte</button>
+<button onclick="location.href='?controller=home&action=home'" type="button">Page d'accueil</button>
+</center>
 <?php
 require('view_end.php');
 ?>

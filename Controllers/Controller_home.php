@@ -103,14 +103,16 @@ class Controller_home extends Controller{
 
   public function action_removefile(){
     $m = Model::getModel();//recupere le modele (la base de données)
-    $filename = $m->getFile($_GET['id'])["filename"];
-    if (unlink("Upload/".$filename)) {
-      $m->removeFile($_GET['id']);
+    $filename = $m->getFile($_GET['id'])["filename"];//recupere le nom du fichier avec l'ID
+    if (unlink("Upload/".$filename)) {//s'il a bien été supprimé du fichier de stockage
+      $m->removeFile($_GET['id']);//supprime l'image de la base de données
+    }else{
+      echo '<script type="text/javascript">alert("Un problème a été rencontré")</script>';//met une pop up d'erreur
     }
     echo("<script>window.location = 'index.php';</script>");
   }
 
-  public function action_deco(){
+  public function action_deco(){//fonction qui deconnecte un administrateur
     session_start();
     $_SESSION['admin'] = false;
     echo("<script>window.location = 'index.php';</script>");

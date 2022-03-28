@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['admin'] = false;
+$_SESSION['admin'] = false;//set une valeur par defaut
 class Controller_login extends Controller{
 
   public function action_default(){
@@ -16,10 +16,9 @@ class Controller_login extends Controller{
       if($_POST['login']===$listLogin[$i]){//verifie si le login est dans la BDD
         $mdp_hash = $m->getMdp($listLogin[$i]);
         if(password_verify($_POST['mdp'], $mdp_hash[0])){//verifie si le mot de passe est correct
-          $_SESSION['admin'] = true;
+          $_SESSION['admin'] = true;//modifie la valeur
           echo '<script type="text/javascript"> alert("Connecté en tant qu\'admin"); </script>';//message de confirmation de bonne connection
           echo("<script>window.location = 'index.php';</script>");
-          //$this->render('login');
         }
       }
     }

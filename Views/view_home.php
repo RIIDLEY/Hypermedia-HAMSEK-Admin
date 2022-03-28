@@ -13,9 +13,9 @@ require('view_begin.php');
             <center><img class="rounded zoom" src="Upload/<?=$ligne['filename']?>" width="auto" height="250" style="padding:10px"></center>
             <p> Titre : <?=$ligne['name']?> | Poid : <?=$ligne['size']?> octets | Type : <?=$ligne['type']?></p>
             <?php
-            if (isset($_SESSION['admin'])) {
-                if ($_SESSION['admin'] === true) {
-                    echo "<a href='?controller=home&action=removefile&id=".($ligne['id'])."'>Supprimer</a> ";
+            if (isset($_SESSION['admin'])) {//si la variable existe
+                if ($_SESSION['admin'] === true) {//si c'est un admmin
+                    echo "<a href='?controller=home&action=removefile&id=".($ligne['id'])."'>Supprimer</a> ";//ajoute le bouton de suppression
                 }
             }
             ?>
@@ -116,14 +116,14 @@ require('view_begin.php');
             <a href="?controller=home&action=lectureFolder" class="btn btn-primary btn-lg scan">Scan</a>
             <br>
             <?php
-            if (isset($_SESSION['admin'])) {
-                if ($_SESSION['admin'] === true) {
-                    echo '<a href="?controller=home&action=deco">Se deconnecter</a>';
+            if (isset($_SESSION['admin'])) {//Si la variable existe
+                if ($_SESSION['admin'] === true) {//si c'est un admin
+                    echo '<a href="?controller=home&action=deco">Se deconnecter</a>';//ajoute le bouton de deconnection
                 }else{
-                    echo '<a href="?controller=login">admin ?</a>';
+                    echo '<a href="?controller=login">Connection admin</a>';
                 }
             }else{
-                echo '<a href="?controller=login">admin ?</a>';
+                echo '<a href="?controller=login">Connection admin</a>';
             }
             ?>
         </div>

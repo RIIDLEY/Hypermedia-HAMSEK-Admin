@@ -93,7 +93,7 @@ class Model
     }
 
 
-    public function getFile($id)//recupere les données en fonction du numéro de page mis en parametre
+    public function getFile($id)//recupere le nom de fichier en fonction de l'id
     {
         try {
             $req = $this->bd->prepare('SELECT filename FROM fichiers_upload WHERE id = :id');
@@ -105,7 +105,7 @@ class Model
         }
     }
 
-    public function removeFile($id)
+    public function removeFile($id)//supprime le fichier dans la BDD en fonction de l'id
     {
         $requete = $this->bd->prepare("DELETE FROM fichiers_upload WHERE id = :id");
         $requete->bindValue(':id', intval($id), PDO::PARAM_INT);

@@ -32,8 +32,18 @@ Une image ne peut pas être téléversé plus d'une fois.
 Un bouton "Scan" est présent sur le site web. Il permet de lire l’ensemble des images dans le dossier et sous dossiers possibles.
 Ces images sont ensuite téléversées vers le dossier de stockage du serveur et référencées sur la base de données.
 
+## Brique 4 : Administration du GED
+
+Un système d'administration a été ajouté. 
+Un membre de l'administration peut se créer un compte. Le mot de passé est hashé et les informations sont envoyé à la base de données.
+Par la suite il peut se connecter et supprimer des images.
+
 ## Identifiant/mot de passe
 
 Pour la base de données
 * Login : hypermedia-hamsek
 * Mot de passe : @x/t3F4chrzpwQDY
+
+Administration de la page
+* Login : coucou
+* Mot de passe : coucou
