@@ -92,6 +92,26 @@ class Model
         
     }
 
+
+    public function getFile($id)//recupere les données en fonction du numéro de page mis en parametre
+    {
+        try {
+            $req = $this->bd->prepare('SELECT filename FROM fichiers_upload WHERE id = :id');
+            $req->bindValue(':id', intval($id), PDO::PARAM_INT);
+            $req->execute();
+            return $req->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die('Echec getFile, erreur n°' . $e->getCode() . ':' . $e->getMessage());
+        }
+    }
+
+    public function removeFile($id)
+    {
+        $requete = $this->bd->prepare("DELETE FROM fichiers_upload WHERE id = :id");
+        $requete->bindValue(':id', intval($id), PDO::PARAM_INT);
+        return $requete->execute();
+    }
+
     public function VerifInDB($filename){//verifie si l'image est deja présente sur la BDD
         $EstDansLaDB = false;
         try {
@@ -107,5 +127,73 @@ class Model
         } catch (PDOException $e) {
             die('Echec VerifInDB, erreur n°' . $e->getCode() . ':' . $e->getMessage());
         }  
+    }
+
+    public static function addLogin($infos)
+    {
+        $m = Model::getModel();
+        try { 
+            //Préparation de la requête
+            $requete = $m->bd->prepare('INSERT INTO user_list_HAMSEK (login, mdp) VALUES (:login, :mdp)');
+            //Remplacement des marqueurs de place par les valeurs
+            $marqueurs = ['login', 'mdp'];
+            foreach ($marqueurs as $value) {
+                $requete->bindValue(':' . $value, $infos[$value]);
+            }
+            //Exécution de la requête
+            return $requete->execute();
+        } catch (PDOException $e) {
+            die('Echec addLogin, erreur n°' . $e->getCode() . ':' . $e->getMessage());
+        }
+    }
+
+
+    /**
+     * Méthode permettant d'obtenir le nom des utilisateurs
+     */
+    public function getLogin()
+    {
+
+        try {
+            $requete = $this->bd->prepare('SELECT login FROM user_list_HAMSEK');
+            $requete->execute();
+            $reponse = [];
+            while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+                $reponse[] = $ligne['login'];
+            }
+            return $reponse;
+        } catch (PDOException $e) {
+            die('Echec getLogin, erreur n°' . $e->getCode() . ':' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Méthode permettant d'obtenir le nombre d'utilisateur
+     */
+    public function getNbLogin()
+    {
+        try {
+            $requete = $this->bd->prepare('SELECT count(*) FROM user_list_HAMSEK');
+            $requete->execute();
+            return $requete->fetch(PDO::FETCH_NUM);
+        } catch (PDOException $e) {
+            die('Echec getNbLogin, erreur n°' . $e->getCode() . ':' . $e->getMessage());
+        }
+    }
+
+
+      /**
+     * Méthode permettant d'obtenir le mot de passe de l'utilisateur hashé
+     */
+    public function getMDP($user)
+    {
+        try {
+            $requete = $this->bd->prepare('SELECT mdp FROM user_list_HAMSEK WHERE login = :user');
+            $requete->bindValue(':user', $user);
+            $requete->execute();
+            return $requete->fetch(PDO::FETCH_NUM);
+        } catch (PDOException $e) {
+            die('Echec getMDP, erreur n°' . $e->getCode() . ':' . $e->getMessage());
+        }
     }
 }

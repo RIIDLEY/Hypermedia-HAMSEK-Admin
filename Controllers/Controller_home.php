@@ -101,6 +101,22 @@ class Controller_home extends Controller{
     closedir($folder);
   }
 
+  public function action_removefile(){
+    $m = Model::getModel();//recupere le modele (la base de données)
+    $filename = $m->getFile($_GET['id'])["filename"];
+    if (unlink("Upload/".$filename)) {
+      $m->removeFile($_GET['id']);
+    }
+    echo("<script>window.location = 'index.php';</script>");
+  }
+
+  public function action_deco(){
+    session_start();
+    $_SESSION['admin'] = false;
+    echo("<script>window.location = 'index.php';</script>");
+
+  }
+
 }
 
 ?>

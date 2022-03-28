@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('view_begin.php');
 ?>
 <center>
@@ -11,6 +12,13 @@ require('view_begin.php');
         <div class="divdata rounded">
             <center><img class="rounded zoom" src="Upload/<?=$ligne['filename']?>" width="auto" height="250" style="padding:10px"></center>
             <p> Titre : <?=$ligne['name']?> | Poid : <?=$ligne['size']?> octets | Type : <?=$ligne['type']?></p>
+            <?php
+            if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
+                    echo "<a href='?controller=home&action=removefile&id=".($ligne['id'])."'>Supprimer</a> ";
+                }
+            }
+            ?>
         </div>
 
     <?php 
@@ -106,10 +114,24 @@ require('view_begin.php');
             <br>
             <!-- Bouton qui permet de lancer le scan du dossier -->
             <a href="?controller=home&action=lectureFolder" class="btn btn-primary btn-lg scan">Scan</a>
+            <br>
+            <?php
+            if (isset($_SESSION['admin'])) {
+                if ($_SESSION['admin'] === true) {
+                    echo '<a href="?controller=home&action=deco">Se deconnecter</a>';
+                }else{
+                    echo '<a href="?controller=login">admin ?</a>';
+                }
+            }else{
+                echo '<a href="?controller=login">admin ?</a>';
+            }
+            ?>
         </div>
     </div>
 
 </div>
+
+
 
 </center>
 
